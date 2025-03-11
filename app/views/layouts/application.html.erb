@@ -18,6 +18,27 @@
   </head>
 
   <body>
+    <!-- ヘッダー部分 -->
+    <nav>
+      <%= link_to "ホーム", root_path %> |
+      <% if user_signed_in? %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> |
+        <%=  current_user.email %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path %> |
+        <%= link_to "サインアップ", new_user_registration_path %>
+      <% end %>
+    </nav>
+
+    <!-- フラッシュメッセージ -->
+    <div id="flash-messages">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>

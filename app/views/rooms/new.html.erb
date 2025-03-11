@@ -1,0 +1,12 @@
+<h1>ルーム作成</h1>
+
+<%= form_with model: @room, local: true do |f| %>
+  <div>
+    <%= f.label :name, "ルーム名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.submit "作成" %>
+  </div>
+<% end %>

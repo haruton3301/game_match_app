@@ -1,0 +1,19 @@
+<h1>ルーム一覧</h1>
+
+<!-- ステータス切り替え -->
+<nav>
+  <%= link_to "待機中", rooms_path(status: "waiting"), class: ("active" if @status == "waiting") %> |
+  <%= link_to "対戦中", rooms_path(status: "playing"), class: ("active" if @status == "playing") %> |
+  <%= link_to "終了", rooms_path(status: "closed"), class: ("active" if @status == "closed") %>
+</nav>
+
+<!-- ルーム一覧 -->
+<ul>
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room.name, room_path(room) %> - <%= room.status %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "新しいルームを作成", new_room_path %>

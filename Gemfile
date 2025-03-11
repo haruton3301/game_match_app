@@ -59,3 +59,10 @@ end
 gem "devise"           # 認証
 gem "redis"            # ActionCable 用
 gem "hotwire-rails"    # Turbo Streams
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "rails-controller-testing"
+  gem "faker"
+end

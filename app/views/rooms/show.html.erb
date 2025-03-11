@@ -1,0 +1,38 @@
+
+<h1><%= @room.name %> ルーム詳細</h1>
+
+<p><strong>ステータス:</strong> <%= @room.status.capitalize %></p>
+
+<p><strong>作成者:</strong> <%= @room.creator.email %></p>
+<p><strong>参加者:</strong> <%= @room.participant ? @room.participant.email : 'まだ参加者なし' %></p>
+
+<% if @user_in_room %>
+<p>あなたはこのルームに参加しています。</p>
+<% else %>
+<% if @can_join %>
+    <%= button_to 'このルームに参加する', join_room_path(@room), method: :patch, class: 'btn btn-primary' %>
+<% else %>
+    <p>現在参加できません。</p>
+<% end %>
+<% end %>
+
+<% if @can_finish %>
+  <h3>試合を終了する</h3>
+  <%= form_with model: @room, url: finish_room_path(@room), method: :patch do |form| %>
+    <div class="form-group">
+      <%= form.label :result, '勝敗' %>
+      <%= form.radio_button :result, 'win' %> 勝ち
+      <%= form.radio_button :result, 'lose' %> 負け
+    </div>
+
+    <%= form.submit '試合を終了する', class: 'btn btn-danger' %>
+  <% end %>
+<% end %>
+
+<% if @room.status == 'closed' %>
+<h3>試合結果</h3>
+<p>勝者: <%= @room.winner.email %></p>
+<p>敗者: <%= @room.loser.email %></p>
+<p>試合終了日時: <%= @room.finished_at %></p>
+<% end %>
+
