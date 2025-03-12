@@ -1,0 +1,8 @@
+<div id="messages" data-room-id="<%= @room.id %>">
+  <%= render @room.messages %>
+</div>
+
+<%= form_with(model: [@room, Message.new], remote: true) do |form| %>
+  <%= form.text_field :content, required: true %>
+  <%= form.submit "送信" %>
+<% end %>

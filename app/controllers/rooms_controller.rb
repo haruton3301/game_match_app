@@ -27,6 +27,8 @@ class RoomsController < ApplicationController
     @user_in_room = [ @room.creator, @room.participant ].include?(current_user)
     @can_join = !@user_in_room && @room.status == "waiting" && @room.participant.nil?
     @can_finish = @room.creator == current_user && @room.status == "playing"
+
+    @messages = @room.messages.includes(:user)
   end
 
   def join

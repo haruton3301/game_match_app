@@ -3,6 +3,7 @@ class Room < ApplicationRecord
   belongs_to :participant, class_name: "User", foreign_key: "participant_id", optional: true
   belongs_to :winner, class_name: "User", foreign_key: "winner_id", optional: true
   belongs_to :loser, class_name: "User", foreign_key: "loser_id", optional: true
+  has_many :messages, dependent: :destroy
 
   enum status: { waiting: 0, playing: 1, closed: 2 }
 

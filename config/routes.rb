@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "rooms#index"
   resources :rooms, only: [ :new, :create, :show, :index ] do
-  member do
-    patch :join    # ルームに参加
-    patch :finish  # 勝敗を記録して試合を終了
+    resources :messages, only: [ :create ]
+    member do
+      patch :join    # ルームに参加
+      patch :finish  # 勝敗を記録して試合を終了
+    end
   end
-end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

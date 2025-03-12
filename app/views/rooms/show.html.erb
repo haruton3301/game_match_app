@@ -36,3 +36,12 @@
 <p>試合終了日時: <%= @room.finished_at %></p>
 <% end %>
 
+<div id="messages" data-room-id="<%= @room.id %>">
+  <%= render @room.messages %>
+</div>
+
+<!-- メッセージ送信フォーム -->
+<%= form_with(model: [@room, Message.new], remote: true) do |form| %>
+  <%= form.text_field :content, required: true %>
+  <%= form.submit "送信" %>
+<% end %>
